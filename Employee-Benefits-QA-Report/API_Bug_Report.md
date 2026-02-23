@@ -146,6 +146,113 @@ Screenshot
 *(screenshots/api_delete_repeated_success.png)*
 
 ---
+Bug 5: GET Employee Returns Success for Non‑Existent or Invalid ID
+Severity: High
+Label: Functional / Data Integrity
+Type: API Behavior Defect
+
+Description
+When performing a GET request for a specific employee by ID (passed through headers or URL), the API returns a successful response even when the ID does not exist in the system.
+A well‑designed REST API should return 404 Not Found when the requested resource is missing.
+Returning 200 OK for an invalid or non‑existent ID misleads clients and prevents proper error handling.
+
+Steps to Reproduce
+Capture a valid GET request for an existing employee.
+
+Modify the ID in the request header or URL to a random, non‑existent value.
+
+Send the GET request.
+
+Observe the response.
+
+Expected Result
+API should return 404 Not Found with a clear error message such as:
+"Employee not found"
+
+No employee object should be returned.
+
+Actual Result
+API returns 200 OK (or another success status).
+
+Response body may be empty, defaulted, or inconsistent.
+
+No error message is provided.
+
+Impact
+Client applications cannot distinguish between valid and invalid IDs.
+
+UI may display incorrect or blank data.
+
+Automation cannot reliably validate employee existence.
+
+Leads to data integrity issues and unpredictable behavior.
+
+Recommendation
+Implement proper ID validation.
+
+Return 404 Not Found when the employee does not exist.
+
+Include a descriptive error message for debugging.
+
+Screenshot
+(screenshots/api_get_invalid_id.png, screenshots/api_get_non_existing_id.png)
+---
+Bug 6: DELETE Returns “1” and 200 OK for Both Valid and Invalid IDs
+Severity: High
+Label: Functional / Data Integrity
+Type: API Behavior Defect
+
+Description
+The DELETE endpoint returns a 200 OK status and a response body of 1 regardless of whether the employee ID exists.
+For valid IDs, the employee is deleted but the response is still “1”.
+For invalid or non‑existent IDs, the API still returns “1” and “200 OK”, indicating a successful operation even though no deletion occurred.
+
+This behavior violates REST standards and prevents clients from distinguishing between successful and failed delete operations.
+
+Steps to Reproduce
+Create an employee via POST.
+
+Delete the employee using DELETE → observe response.
+
+Repeat the DELETE request with the same ID.
+
+Delete a completely random or invalid ID.
+
+Observe that all responses return “1” and “200 OK”.
+
+Expected Result
+Valid ID → 200 OK or 204 No Content, with a meaningful message.
+
+Invalid or non‑existent ID → 404 Not Found with an error message.
+
+Response body should not be a raw integer.
+
+Actual Result
+API returns 1 and 200 OK for both valid and invalid IDs.
+
+No error message is provided.
+
+No distinction between successful and failed deletions.
+
+Impact
+Client applications cannot detect failed deletions.
+
+Automation cannot validate deletion behavior.
+
+UI may show inconsistent or duplicate data.
+
+Leads to data integrity issues.
+
+Recommendation
+Validate ID existence before performing delete.
+
+Return 404 Not Found when the ID does not exist.
+
+Replace raw integer responses with meaningful JSON messages.
+
+Screenshot
+(screenshots/api_delete_invalid_id_returns_1.png,screenshots/api_get_non_existing_id.png)
+---
 
 Observation 1: Salary Field Defaults to 52000 Even When a Value Is Provided
 **Severity:** Medium  
@@ -216,3 +323,4 @@ Screenshot
 ---
 
 End of API Bug Report
+
