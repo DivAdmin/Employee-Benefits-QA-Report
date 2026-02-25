@@ -131,6 +131,34 @@ Screenshot:
 (screenshots/ui_add_button_unresponsive.png)
 
 ---
+Bug 6: Delete Functionality Freezes After Deleting Multiple Rows, when performed consecutively
+**Severity:**: High
+**Type**: UI Responsiveness Defect
+
+Description:  
+When the user deletes several employee records in rapid succession, the application becomes unresponsive.
+The delete action stops working, and the UI freezes until the page is refreshed.
+
+Steps to Reproduce:
+1.Log in to the application with valid credentials.
+2.Delete an employee record using the Delete (X) action.
+3.Immediately delete additional rows one after another.
+4.Observe the UI after 2–3 consecutive deletions.
+
+Expected Result:
+1.Each delete action should complete successfully.
+2.The UI should remain responsive after multiple deletions.
+
+Actual Result:
+1.The UI freezes after several rapid deletions.
+2.Delete button becomes unresponsive.
+3.No error message or feedback is displayed.
+4.User must refresh the page to continue.
+
+Screenshot:  
+(screenshots/ui_delete_freeze.png)
+
+---
 Observation 1: Dependant Maximum Value Set to 32
 **Severity:** Low  
 **Type:** Business Rule Clarification Needed  
@@ -158,7 +186,7 @@ Recommendation:
 Add a “Refresh Data” or “Reload” button.
 
 Screenshot
-![Missing refresh button](screenshots/ui_missing_refresh_button.png)
+(screenshots/ui_missing_refresh_button.png)
 
 ---
 
@@ -189,5 +217,30 @@ Introduce a sequence number (S.No) column to help users quickly identify and ref
 
 Screenshot
 (screenshots/ui_missing_index_No.png)
- 
+
+Observation 5: Missing Pagination in Employee List Table
+**Severity**: Low
+**Type**: UX Improvement / Missing Feature
+
+Description:  
+The employee list table does not provide pagination. When the number of employee records grows, the table becomes long and difficult to navigate. Lack of pagination reduces readability, increases scrolling effort, and makes it harder for users to locate or compare records efficiently—especially in environments with large datasets.
+
+Recommendation:  
+Introduce pagination controls (e.g., 10/25/50 rows per page) to improve navigation, readability, and overall user experience when managing large employee lists.
+
+Screenshot:  
+(screenshots/ui_missing_pagination.png)
+
+Observation 6: Missing Loader/Spinner During Data Fetch
+**Severity**: Medium
+**Type**: UX Issue / Missing Feedback Indicator
+
+Description:  
+When the application is fetching data, no loader or spinner is displayed to indicate that the system is processing the request. This results in a confusing user experience, as users may assume the page is unresponsive, stuck, or that no action has been triggered. Providing a visual loading indicator is essential for clarity, especially when data retrieval takes noticeable time.
+
+Recommendation:  
+Introduce a loader or spinner component that appears during data fetch operations. This will provide immediate feedback, reassure users that the system is working, and improve overall usability.
+
+Screenshot  
+(screenshots/ui_missing_loader.png)
 End of UI Bug Report
