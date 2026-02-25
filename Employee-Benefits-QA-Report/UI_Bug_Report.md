@@ -1,11 +1,11 @@
-UI Bug Report – Benefits Dashboard application
+UI Bug Report – Paylocity Benefits Dashboard application
 
 This document lists all UI defects and observations identified during testing.
 
 Bug 1: No Error Message Displayed When Invalid Inputs Are Entered in Add Employee Form
 **Severity:** Medium  
 **Type:** Validation Defect  
-**Environment:** Chrome Browser, Desktop  
+
 
 Description:
 When invalid data is entered in the Add Employee form, the application does not display any validation error messages.
@@ -244,3 +244,4 @@ Introduce a loader or spinner component that appears during data fetch operation
 Screenshot  
 (screenshots/ui_missing_loader.png)
 End of UI Bug Report
+
