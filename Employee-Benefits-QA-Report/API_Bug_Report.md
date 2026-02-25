@@ -1,4 +1,4 @@
-API Bug Report – Benefits Dashboard application
+API Bug Report – Paylocity Benefits Dashboard Application
 
 This document lists all API defects and observations identified during testing.  
 Each issue includes severity, labels, reproduction steps, expected vs actual results, and screenshot placeholders.
@@ -278,3 +278,4 @@ Screenshot
 ---
 
 End of API Bug Report
+
